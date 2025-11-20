@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+   
+    <record id="action_print_visitor_card" model="ir.actions.report">
+        <field name="name">Print Visitor Card</field>
+        <field name="model">visitor.visitor</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">visitor_management.visitor_card_template</field>
+        <field name="report_file">visitor_management.visitor_card_template</field>
+        <field name="binding_model_id" ref="model_visitor_visitor"/>
+        <field name="binding_type">report</field>
+        <field name="print_report_name">'Visitor_Card_%s' % (object.name)</field>
+    </record>
+
+   
+    <template id="visitor_card_template">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <div class="page" style="
+                    width: 350px;
+                    height: 500px;
+                    margin: 40px auto;
+                    padding: 30px;
+                    border-radius: 15px;
+                    border: 2px solid #1F2937;
+                    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+                    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                    background: linear-gradient(135deg, #f0f4f8, #ffffff);
+                    position: relative;
+                    overflow: hidden;
+                ">
+                    
+                    <div style="text-align:center; margin-bottom:20px;">
+                        <h1 style="
+                            color:#d4380d;
+                            font-size:28px;
+                            font-weight:bold;
+                            margin:0;
+                            text-transform: uppercase;
+                            letter-spacing: 1px;
+                        ">VISITOR CARD</h1>
+                        <p style="margin:5px 0; color:#4B5563; font-weight:600;">Welcome</p>
+                        <hr style="border:none; height:2px; background:#d4380d; width:50px; margin:10px auto;"/>
+                    </div>
+
+                    
+                    <div style="margin:20px 0; line-height:1.5;">
+                        <p style="font-size:18px; margin:8px 0;">
+                            <strong style="color:#1F2937;">Name:</strong>
+                            <span t-field="o.name"/>
+                        </p>
+                        <p style="font-size:16px; margin:8px 0;">
+                            <strong style="color:#1F2937;">Phone:</strong>
+                            <span t-field="o.phone"/>
+                        </p>
+                        <p style="font-size:16px; margin:8px 0;" t-if="o.address">
+                            <strong style="color:#1F2937;">Address:</strong>
+                            <span t-field="o.address"/>
+                        </p>
+                        <p style="font-size:16px; margin:8px 0;" t-if="o.purpose">
+                            <strong style="color:#1F2937;">Purpose:</strong>
+                            <span t-field="o.purpose"/>
+                        </p>
+                        <p style="font-size:14px; margin:8px 0; color:#6B7280;">
+                            <strong>Check-In:</strong> 
+                            <span t-field="o.check_in"/>
+                        </p>
+                    </div>
+
+                   
+                    <div style="
+                        position:absolute;
+                        bottom:20px;
+                        width:calc(100% - 60px);
+                        text-align:center;
+                        font-size:12px;
+                        color:#9CA3AF;
+                        font-style:italic;
+                    ">
+                        Please wear this card visibly at all times.
+                    </div>
+
+                   
+                    <div style="
+                        position:absolute;
+                        top:-50px;
+                        right:-50px;
+                        width:150px;
+                        height:150px;
+                        background:rgba(212, 56, 13, 0.1);
+                        border-radius:50%;
+                        z-index:0;
+                    "></div>
+
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>

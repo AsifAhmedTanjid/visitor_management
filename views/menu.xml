@@ -1,0 +1,19 @@
+<!-- <odoo>
+
+    <menuitem id="visitor_main_menu" name="visitor management" />
+    <menuitem id="visitor_menu" name="Visitor" parent="visitor_main_menu" />
+
+</odoo> -->
+
+<odoo>
+    <!-- Main Menu -->
+    <menuitem id="visitor_main_menu" name="Visitor Management" sequence="10"/>
+
+    <!-- Sub Menu linked to the action -->
+    <menuitem id="visitor_menu"
+              name="Visitors"
+              parent="visitor_main_menu"
+              action="visitor_action"
+              sequence="1"/>
+</odoo>
+
